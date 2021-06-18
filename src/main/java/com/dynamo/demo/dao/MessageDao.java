@@ -105,6 +105,25 @@ public class MessageDao {
 	}
 
 	/**
+	 * Returns all messages for author and severity, using filter expression.
+	 * 
+	 * @param author
+	 * @param severity
+	 * @return list of messages
+	 */
+	public List<Message> getAllForAuthorAndSeverity(String author, String severity) {
+		Map<String, AttributeValue> eav = new HashMap<String, AttributeValue>();
+		eav.put(":author", new AttributeValue().withS(author));
+		eav.put(":severity", new AttributeValue().withS(severity));
+
+		DynamoDBQueryExpression<Message> queryExpression = new DynamoDBQueryExpression<Message>()
+				.withKeyConditionExpression("author = :author").withFilterExpression("severity = :severity")
+				.withExpressionAttributeValues(eav);
+
+		return this.mapper.query(Message.class, queryExpression);
+	}
+
+	/**
 	 * Returns all messages.
 	 * 
 	 * @return list of messages

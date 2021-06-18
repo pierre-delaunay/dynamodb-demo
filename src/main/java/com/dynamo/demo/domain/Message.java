@@ -20,6 +20,7 @@ public class Message {
 	private String content;
 	private LocalDateTime created;
 	private String author;
+	private String severity;
 
 	public String getContent() {
 		return content;
@@ -46,6 +47,14 @@ public class Message {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(String severity) {
+		this.severity = severity;
 	}
 
 	@Override

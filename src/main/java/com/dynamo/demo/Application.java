@@ -69,7 +69,8 @@ public class Application {
 
 		Message message = new Message();
 		message.setAuthor("john.doe");
-		message.setContent("myContent");
+		message.setContent("myNewContent");
+		message.setSeverity("high");
 		message.setCreated(LocalDateTime.of(2020, 06, 30, 20, 10)); // LocalDateTime.now()
 
 		// Save the message
@@ -83,6 +84,12 @@ public class Application {
 		List<Message> messages = messageDao.getAllForAuthorAndYear("john.doe", "2020");
 		LOGGER.info(messages.size() + " messages retrieved");
 		messages.forEach(m -> {
+			LOGGER.info(m.toString());
+		});
+
+		List<Message> messagesBySeverity = messageDao.getAllForAuthorAndSeverity("john.doe", "high");
+		LOGGER.info(messagesBySeverity.size() + " messages retrieved");
+		messagesBySeverity.forEach(m -> {
 			LOGGER.info(m.toString());
 		});
 	}
